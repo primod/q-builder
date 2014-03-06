@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+        <title> Query Builder</title>
+        <link rel="stylesheet" href="css/Bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>'Q' Builder</h1>
+            <div class="alert alert-info">
+                <strong>Example Output</strong><br/>
+                <span id = "output"></span>
+            </div>
+            <!-- from -->
+            <div id = "from">
+                <div class="alert alert-warning alert-group" id = "mainFrom">
+                    <button id ="fromBtn" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> <b>  From: </b></button>
+                    <div class="from-model">
+
+                    </div>
+
+
+                </div>
+            </div>    <!-- from ends -->
+
+            <!-- select -->
+            <div id = "select">
+                <div class="alert alert-warning alert-group" id = "mainSelect">
+                    <button id ="selectBtn" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span> <b>  Select: </b></button>
+                    <div class="select-lines">
+                    </div>
+
+
+                </div>
+            </div>    <!-- select ends -->
+
+            <!-- where clause -->
+            <div id = "where">
+                <div class="alert alert-warning alert-group" id = "mainWhere">
+                    <button id ="whereBtn" class="btn btn-primary"><span class="glyphicon glyphicon-indent-left"></span> <b>  Where: </b></button>
+                    <div class="group-conditions">
+
+                    </div>
+
+
+                </div>
+            </div> <!-- where Ends -->
+            
+            <!-- order clause -->
+            <div id = "order">
+                <div class="alert alert-warning alert-group" id = "mainOrder">
+                    <button id ="orderBtn" class="btn btn-primary"><span class="glyphicon glyphicon-sort-by-attributes"></span> <b>  Order by: </b></button>
+                    <div class="order-by">
+
+                    </div>
+
+
+                </div>
+            </div> <!-- order Ends -->
+            
+            <!-- limit clause -->
+            <div id = "limit">
+                <div class="alert alert-warning alert-group" id = "mainLimit">
+                    <button id ="LimitBtn" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> <b>  Limit: </b></button>
+                    <div class="limit-line">
+
+                    </div>
+
+
+                </div>
+            </div> <!-- limit Ends -->
+            
+            <!-- page clause -->
+            <div id = "page">
+                <div class="alert alert-warning alert-group" id = "mainPage">
+                    <button id ="pageBtn" class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> <b>  Page: </b></button>
+                    <div class="page-line">
+
+                    </div>
+
+
+                </div>
+            </div> <!-- page Ends -->
+            
+            <!-- paginate clause -->
+            <div id = "paginate">
+                <div class="alert alert-warning alert-group" id = "mainPaginate">
+                    <button id ="paginateBtn" class="btn btn-primary"><span class="glyphicon glyphicon-resize-horizontal"></span> <b>  Paginate as: </b></button>
+                    <div class="paginate-line">
+
+                    </div>
+
+
+                </div>
+            </div> <!-- paginate Ends -->
+
+
+
+        </div>
+        <!-- Template where condition -->
+        <div target="cloneCondition" class="condition" id ="dupCondition" style="display: none">
+            <select id = "fields"></select>
+            <select id ="comparisons"></select>
+            <input id ="Value" type="text"></input>
+            <button id ="removeCondition" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus-sign"></span></button>
+        </div>  <!-- Template Ends -->
+        <!-- Template where Group -->
+        <div class="alert alert-warning alert-group" id = "dupGroup" target="cloneGroup" style="display: none">
+            <select id = "logicalOperators"> </select>
+            <button id ="addCondition" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Add Condition</button>
+            <button id ="addGroup" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Add Group</button>
+            <button id ="removeGroup" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-minus-sign"></span> Remove Group</button>
+            <div class="group-conditions">
+
+            </div>
+        </div>   <!-- Template Ends -->
+        <!-- Temlate From -->
+        <div  class="" id ="dupFrom" target="cloneFrom" style="display: none" >
+            <select id = "fromModel"></select>
+            <input id ="fromTxt" type="text"></input>
+            <button id ="fromSubmit" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+            <button id ="fromClear" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-remove-sign"></span></button>
+            <button id ="removeFrom" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus-sign"></span></button>
+        </div> <!-- Template Ends -->
+
+        <!-- Temlate Select -->
+        <div  class="" id ="dupSelect" target="cloneSelect" style="display: none"  >
+            <select id = "selectFields"></select>
+            <input id ="selectTxt" type="text"></input>
+            <button id ="selectClear" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-remove-sign"></span></button>
+            <button id ="selectAdd" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-plus-sign"></span></button>
+            <button id ="selectRemove" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus-sign"></span></button>
+        </div> <!-- Template Ends -->
+        
+        <!-- Temlate Order -->
+        <div  class="" id ="dupOrder" target="cloneOrder" style="display: none"  >
+            <select id = "orderFields"></select>
+            <input id ="orderTxt" type="text"></input>
+            <select id = "orderBy"></select>
+            <button id ="orderClear" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-remove-sign"></span></button>
+            <button id ="orderRemove" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus-sign"></span></button>
+        </div> <!-- Template Ends -->
+        
+        <!-- Temlate Limit -->
+        <div  class="" id ="dupLimit" target="cloneLimit" style="display: none"  >
+            <input id ="limitTxt" type="text" class="col-md-1"></input>
+            <button id ="limitClear" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-remove-sign"></span></button>
+            <button id ="limitRemove" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus-sign"></span></button>
+        </div> <!-- Template Ends -->
+        
+         <!-- Temlate Page -->
+        <div  class="" id ="dupPage" target="clonePage" style="display: none"  >
+            <input id ="pageTxt" type="text" class="col-md-1"></input>
+            <button id ="pageClear" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-remove-sign"></span></button>
+            <button id ="pageRemove" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus-sign"></span></button>
+        </div> <!-- Template Ends -->
+        
+        <!-- Temlate paginate as -->
+        <div  class="" id ="dupPaginate" target="clonePaginate" style="display: none"  >
+            <select id = "paginateBy"></select>
+            <button id ="paginateRemove" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus-sign"></span></button>
+        </div> <!-- Template Ends -->
+
+
+        <!-- js -->
+        <script src="js/vendor/jquery-min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/from.js"></script>
+        <script src="js/where.js"></script>
+        <script src="js/select.js"></script>
+        <script src="js/order.js"></script>
+        <script src="js/limit.js"></script>
+        <script src="js/page.js"></script>
+        
+    </body>
+</html>
