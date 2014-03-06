@@ -52,7 +52,10 @@ function processWhere(dom, where, prevOp) {
                         var prev = finalResult[x];
                         if ($.isArray(prev)) {
                             finalResult[x].push(result[x]);
-                        } else {
+                        } else if($.isArray(result[x])){
+                            result[x].push(prev);
+                            finalResult[x] = result[x];
+                        } else{
                             var newArr = [];
                             newArr.push(prev);
                             newArr.push(result[x]);
