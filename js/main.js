@@ -51,15 +51,22 @@ function processWhere(dom, where, prevOp) {
                     if (x in finalResult) {
                         var prev = finalResult[x];
                         if ($.isArray(prev)) {
-                            finalResult[x].push(result[x]);
-                        } else if($.isArray(result[x])){
-                            result[x].push(prev);
-                            finalResult[x] = result[x];
-                        } else{
+                            if ($.isArray(result[x])) {
+                                finalResult[x] = prev.concat(result[x]);
+                            } else {
+                                finalResult[x].push(result[x]);
+                            }
+
+                        } else {
                             var newArr = [];
                             newArr.push(prev);
-                            newArr.push(result[x]);
-                            finalResult[x] = newArr;
+                            if (isArray(result[x])) {
+                                newArr.concat(result[x]);
+                                finalResult[x] = newArr;
+                            } else {
+                                newArr.push(result[x]);
+                                finalResult[x] = newArr;
+                            }
                         }
                     } else {
                         finalResult[x] = result[x];
@@ -74,12 +81,21 @@ function processWhere(dom, where, prevOp) {
                     if (x in finalResult['OR']) {
                         var prev = finalResult['OR'][x];
                         if ($.isArray(prev)) {
-                            finalResult['OR'][x].push(result[x]);
+                            if (isArray(result[x])) {
+                                finalResult['OR'][x] = prev.concat(result[x]);
+                            } else {
+                                finalResult['OR'][x].push(result[x]);
+                            }
                         } else {
                             var newArr = [];
                             newArr.push(prev);
-                            newArr.push(result[x]);
-                            finalResult['OR'][x] = newArr;
+                            if (isArray(result[x])) {
+                                newArr.concat(result[x]);
+                                finalResult['OR'][x] = newArr;
+                            } else {
+                                newArr.push(result[x]);
+                                finalResult['OR'][x] = newArr;
+                            }
                         }
                     } else {
                         finalResult['OR'][x] = result[x];
