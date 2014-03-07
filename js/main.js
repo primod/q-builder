@@ -61,7 +61,7 @@ function processWhere(dom, where, prevOp) {
                             var newArr = [];
                             newArr.push(prev);
                             if (isArray(result[x])) {
-                                newArr.concat(result[x]);
+                               newArr =  newArr.concat(result[x]);
                                 finalResult[x] = newArr;
                             } else {
                                 newArr.push(result[x]);
@@ -90,7 +90,7 @@ function processWhere(dom, where, prevOp) {
                             var newArr = [];
                             newArr.push(prev);
                             if ($.isArray(result[x])) {
-                                newArr.concat(result[x]);
+                           newArr =   newArr.concat(result[x]);
                                 finalResult['OR'][x] = newArr;
                             } else {
                                 newArr.push(result[x]);
